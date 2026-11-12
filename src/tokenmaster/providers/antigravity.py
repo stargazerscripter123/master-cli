@@ -22,8 +22,10 @@ from tokenmaster.models import (
     format_reset_countdown,
     parse_reset_remaining_seconds,
 )
+from tokenmaster.providers.antigravity_cli import AntigravityCliClient
 from tokenmaster.providers.base import (
     BaseProvider,
+    HttpError,
     atomic_write_text,
     critical_section,
     file_lock,
@@ -389,6 +391,16 @@ class AntigravityProvider(BaseProvider):
         except Exception:
             return None
 
+    def _query_cli_status(self) -> Optional[dict[str, Any]]:
+        # An explicit endpoint or profile must never fall back to another
+        # subscription in the default system keyring.
+        if self._is_isolated_profile() or self.cfg.get("port") or self.cfg.get("csrf_token"):
+            return None
+        default_dir = Path.home() / ".gemini" / "antigravity"
+        if self._antigravity_dir().resolve() != default_dir.resolve():
+            return None
+        return AntigravityCliClient(self.http_json, self.timeout).query()
+
     def _scan_local_brain(self) -> dict[str, Any]:
         """Scan ~/.gemini/antigravity/brain for 7d/30d local agent steps and conversations."""
         agy_root = self._antigravity_dir()
@@ -472,9 +484,19 @@ class AntigravityProvider(BaseProvider):
         if not isinstance(brain_stats, dict):
             brain_stats = {"brain_accessible": False, "conversations_7d": 0, "steps_7d": 0, "steps_30d": 0}
         sources: list[str] = []
+        quota_source = "Connect-RPC GetUserStatus"
+        if not isinstance(rpc_data, dict):
+            try:
+                rpc_data = self._query_cli_status()
+                quota_source = "Antigravity CLI Google quota API"
+            except (HttpError, RuntimeError) as exc:
+                report.status = "partial" if brain_stats["brain_accessible"] else "error"
+                detail = f" (HTTP {exc.status})" if isinstance(exc, HttpError) else ""
+                report.error_message = f"Antigravity CLI quota query failed{detail}"
+                report.auth_hint = "Check the native agy sign-in and access to the unlocked Linux keyring"
 
         if isinstance(rpc_data, dict):
-            sources.append("Connect-RPC GetUserStatus")
+            sources.append(quota_source)
             report.status = "ok"
             user_status = (
                 rpc_data.get("userStatus")

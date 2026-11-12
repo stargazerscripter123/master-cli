@@ -22,7 +22,7 @@ tokenmaster --json
 |---|---|
 | `codex` | `~/.codex/auth.json` 與 Codex 用量 API。本地工作階段 JSONL 是後援 |
 | `claude` | `~/.claude/.credentials.json` 或 macOS 鑰匙圈，然後是 Anthropic 用量 API |
-| `antigravity` | 本地 Connect-RPC 端點；快取過期時從正在跑的語言伺服器找出來 |
+| `antigravity` | 本地語言伺服器 Connect-RPC；Linux 預設個人帳號也支援[原生鑰匙圈配額 API](antigravity-linux.md) |
 | `grok` | `grok` CLI 的驗證檔、grok.com cookie，或 xAI API 金鑰 |
 | `cursor` | `cursor-agent` 的驗證、macOS 鑰匙圈，或 `state.vscdb` |
 | `openrouter` | `OPENROUTER_API_KEY`，或用 `tokenmaster auth` 存下來的金鑰 |

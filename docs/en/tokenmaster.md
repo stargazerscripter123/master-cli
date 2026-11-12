@@ -22,7 +22,7 @@ tokenmaster --json
 |---|---|
 | `codex` | `~/.codex/auth.json` and the Codex usage API. Local session JSONL is a fallback |
 | `claude` | `~/.claude/.credentials.json` or the macOS keychain, then the Anthropic usage API |
-| `antigravity` | A local Connect-RPC endpoint, discovered from the running language server when the cache is stale |
+| `antigravity` | Local language-server Connect-RPC; default Linux consumer sign-ins also support the [native keyring quota API](antigravity-linux.md) |
 | `grok` | The `grok` CLI auth file, a grok.com cookie, or an xAI API key |
 | `cursor` | `cursor-agent` auth, the macOS keychain, or `state.vscdb` |
 | `openrouter` | `OPENROUTER_API_KEY` or a key saved with `tokenmaster auth` |
