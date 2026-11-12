@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "master-cli"
+version = "0.1.0"
+description = "Terminal toolkit for GPU fleets, local system telemetry, thermals, and AI subscription quotas."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+keywords = ["gpu", "tui", "monitoring", "ssh", "thermal"]
+classifiers = [
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Monitoring",
+]
+dependencies = []
+
+[project.scripts]
+master = "mastercli.cli:main"
+gpumaster = "gpumaster.cli:main"
+macmaster = "macmaster.cli:main"
+btop-nvtop = "macmaster.cli:main"
+thermalmaster = "thermalmaster.cli:main"
+tokenmaster = "tokenmaster.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+gpumaster = ["remote.sh"]

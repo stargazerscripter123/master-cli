@@ -1,0 +1,90 @@
+__META__
+proto	2
+ts	1710142867
+__HOST__
+hostname	workstation-c
+arch	x86_64
+kernel	6.8.0-28-generic
+ncpu	48
+loadavg	0.77 0.30 0.16 1/1830 435791
+uptime	88485
+mem.MemTotal	131224428
+mem.MemFree	56053144
+mem.MemAvailable	95459572
+mem.Buffers	210008
+mem.Cached	40260956
+mem.SwapTotal	8388604
+mem.SwapFree	6687976
+mem.Dirty	2352
+mem.Shmem	26044
+mem.SReclaimable	460520
+__PSI__
+memory.some	avg10=0.00	avg60=0.00	avg300=0.00
+memory.full	avg10=0.00	avg60=0.00	avg300=0.00
+cpu.some	avg10=0.00	avg60=0.00	avg300=0.00
+cpu.full	avg10=0.00	avg60=0.00	avg300=0.00
+io.some	avg10=0.00	avg60=0.00	avg300=0.00
+io.full	avg10=0.00	avg60=0.00	avg300=0.00
+__GPU__
+fieldset	full
+fields	index,uuid,name,pci.bus_id,driver_version,vbios_version,pstate,temperature.gpu,temperature.gpu.tlimit,fan.speed,utilization.gpu,utilization.memory,utilization.encoder,utilization.decoder,memory.total,memory.used,memory.free,memory.reserved,power.draw.instant,power.limit,enforced.power.limit,power.max_limit,clocks.sm,clocks.max.sm,clocks.mem,clocks.max.mem,clocks.video,pcie.link.gen.current,pcie.link.gen.max,pcie.link.width.current,pcie.link.width.max,clocks_event_reasons.active,compute_mode,persistence_mode,mig.mode.current
+row	0, GPU-e986a6b2-0fa4-560f-a629-e41ae11c3e4f, NVIDIA GeForce RTX 5090, 00000000:41:00.0, 550.127.05, 96.00.2A.00.01, P8, 51, 39, 0, 0, 0, 0, 0, 32607, 26686, 5401, 521, 9.09, 575.00, 575.00, 600.00, 195, 3105, 405, 14001, 600, 1, 5, 16, 16, 0x0000000000000000, Default, Disabled, [N/A]
+row	1, GPU-73ba677a-4bb0-5b73-9aa6-39b6142dea11, NVIDIA GeForce RTX 5090, 00000000:C8:00.0, 550.127.05, 96.00.2A.00.01, P8, 46, 44, 0, 0, 0, 0, 0, 32607, 16, 32094, 498, 16.08, 575.00, 575.00, 600.00, 210, 3105, 405, 14001, 607, 1, 5, 8, 16, 0x0000000000000000, Default, Disabled, [N/A]
+__PIDS__
+|
+|==============NVSMI LOG==============
+|
+|Timestamp                                              : Tue Mar 11 09:41:07 2025
+|Driver Version                                         : 550.127.05
+|CUDA Version                                           : 13.0
+|
+|Attached GPUs                                          : 2
+|GPU 00000000:41:00.0
+|    Processes
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 4450
+|            Type                          : G
+|            Name                          : /usr/lib/xorg/Xorg
+|            Used GPU Memory               : 260 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 4684
+|            Type                          : G
+|            Name                          : /usr/bin/gnome-shell
+|            Used GPU Memory               : 47 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 5364
+|            Type                          : G
+|            Name                          : /opt/teamviewer/tv_bin/TeamViewer
+|            Used GPU Memory               : 22 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 98590
+|            Type                          : C
+|            Name                          : /home/user/miniconda3/envs/train_py312/bin/python
+|            Used GPU Memory               : 25984 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 234435
+|            Type                          : C+G
+|            Name                          : /usr/bin/warp-terminal
+|            Used GPU Memory               : 214 MiB
+|
+|GPU 00000000:C8:00.0
+|    Processes
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 4450
+|            Type                          : G
+|            Name                          : /usr/lib/xorg/Xorg
+|            Used GPU Memory               : 4 MiB
+__PS__
+requested	5
+row	   4450 user     0.3 50136    23:26:30 /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -nolisten tcp -background none -noreset -keeptty -novtswitch -verbose 3
+row	   4684 user     2.3 424096   23:26:28 /usr/bin/gnome-shell
+row	   5364 user     0.8 138900   23:26:26 /opt/teamviewer/tv_bin/TeamViewer
+row	  98590 user     3.4 29740772 20:14:08 /home/user/miniconda3/envs/train_py312/bin/python main.py --listen 127.0.0.1 --port 8188 --disable-auto-launch
+row	 234435 user     2.4 719448   10:02:41 /usr/bin/warp-terminal
+__END__	141

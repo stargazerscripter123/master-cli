@@ -1,0 +1,202 @@
+{
+ "format": "thermalmaster-probe/1",
+ "platform": "linux",
+ "arch": "aarch64",
+ "info": {
+  "host": "spark-2",
+  "arch": "aarch64",
+  "kernel": "6.11.0-1008-nvidia",
+  "os": "Ubuntu 24.04.5 LTS",
+  "model": "NVIDIA DGX Spark",
+  "cpu": ""
+ },
+ "fs": {
+  "glob": {
+   "/sys/class/hwmon/hwmon*": [
+    "/sys/class/hwmon/hwmon0",
+    "/sys/class/hwmon/hwmon1",
+    "/sys/class/hwmon/hwmon2",
+    "/sys/class/hwmon/hwmon3",
+    "/sys/class/hwmon/hwmon4",
+    "/sys/class/hwmon/hwmon5",
+    "/sys/class/hwmon/hwmon6"
+   ],
+   "/sys/class/hwmon/hwmon1/temp*_input": [
+    "/sys/class/hwmon/hwmon1/temp1_input",
+    "/sys/class/hwmon/hwmon1/temp2_input",
+    "/sys/class/hwmon/hwmon1/temp3_input"
+   ],
+   "/sys/class/hwmon/hwmon1/fan*_input": [],
+   "/sys/class/hwmon/hwmon2/temp*_input": [
+    "/sys/class/hwmon/hwmon2/temp1_input"
+   ],
+   "/sys/class/hwmon/hwmon2/fan*_input": [],
+   "/sys/class/hwmon/hwmon3/temp*_input": [
+    "/sys/class/hwmon/hwmon3/temp1_input"
+   ],
+   "/sys/class/hwmon/hwmon3/fan*_input": [],
+   "/sys/class/hwmon/hwmon4/temp*_input": [
+    "/sys/class/hwmon/hwmon4/temp1_input"
+   ],
+   "/sys/class/hwmon/hwmon4/fan*_input": [],
+   "/sys/class/hwmon/hwmon5/temp*_input": [
+    "/sys/class/hwmon/hwmon5/temp1_input"
+   ],
+   "/sys/class/hwmon/hwmon5/fan*_input": [],
+   "/sys/class/hwmon/hwmon6/temp*_input": [
+    "/sys/class/hwmon/hwmon6/temp1_input"
+   ],
+   "/sys/class/hwmon/hwmon6/fan*_input": [],
+   "/sys/class/thermal/thermal_zone*": [
+    "/sys/class/thermal/thermal_zone0",
+    "/sys/class/thermal/thermal_zone1",
+    "/sys/class/thermal/thermal_zone2",
+    "/sys/class/thermal/thermal_zone3",
+    "/sys/class/thermal/thermal_zone4",
+    "/sys/class/thermal/thermal_zone5",
+    "/sys/class/thermal/thermal_zone6"
+   ],
+   "/sys/class/thermal/thermal_zone0/trip_point_*_type": [
+    "/sys/class/thermal/thermal_zone0/trip_point_0_type"
+   ],
+   "/sys/class/thermal/thermal_zone1/trip_point_*_type": [
+    "/sys/class/thermal/thermal_zone1/trip_point_0_type"
+   ],
+   "/sys/class/thermal/thermal_zone2/trip_point_*_type": [
+    "/sys/class/thermal/thermal_zone2/trip_point_0_type"
+   ],
+   "/sys/class/thermal/thermal_zone3/trip_point_*_type": [
+    "/sys/class/thermal/thermal_zone3/trip_point_0_type"
+   ],
+   "/sys/class/thermal/thermal_zone4/trip_point_*_type": [
+    "/sys/class/thermal/thermal_zone4/trip_point_0_type"
+   ],
+   "/sys/class/thermal/thermal_zone5/trip_point_*_type": [
+    "/sys/class/thermal/thermal_zone5/trip_point_0_type"
+   ],
+   "/sys/class/thermal/thermal_zone6/trip_point_*_type": [
+    "/sys/class/thermal/thermal_zone6/trip_point_0_type"
+   ],
+   "/sys/class/power_supply/*": []
+  },
+  "read": {
+   "/etc/os-release": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo",
+   "/sys/class/dmi/id/sys_vendor": "NVIDIA",
+   "/sys/class/dmi/id/product_name": "NVIDIA_DGX_Spark",
+   "/proc/cpuinfo": "processor\t: 0\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd87\nCPU revision\t: 1\n\nprocessor\t: 1\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd87\nCPU revision\t: 1\n\nprocessor\t: 2\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd87\nCPU revision\t: 1\n\nprocessor\t: 3\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd87\nCPU revision\t: 1\n\nprocessor\t: 4\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd87\nCPU revision\t: 1\n\nprocessor\t: 5\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd85\nCPU revision\t: 1\n\nprocessor\t: 6\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd85\nCPU revision\t: 1\n\nprocessor\t: 7\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd85\nCPU revision\t: 1\n\nprocessor\t: 8\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti ecv afp wfxt\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd85\nCPU revision\t: 1\n\nprocessor\t: 9\nBogoMIPS\t: 2000.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat il",
+   "/sys/class/hwmon/hwmon1/name": "nvme",
+   "/sys/class/hwmon/hwmon2/name": "mlx5",
+   "/sys/class/hwmon/hwmon3/name": "mlx5",
+   "/sys/class/hwmon/hwmon4/name": "mlx5",
+   "/sys/class/hwmon/hwmon5/name": "mlx5",
+   "/sys/class/hwmon/hwmon6/name": "mt7925_phy0",
+   "/sys/class/hwmon/hwmon1/device/model": "SAMSUNG MZALC4T0HBL1-00B07",
+   "/sys/class/hwmon/hwmon1/temp1_label": "Composite",
+   "/sys/class/hwmon/hwmon1/temp1_max": "82850",
+   "/sys/class/hwmon/hwmon1/temp1_crit": "84850",
+   "/sys/class/hwmon/hwmon1/temp2_label": "Sensor 1",
+   "/sys/class/hwmon/hwmon1/temp2_max": "65261850",
+   "/sys/class/hwmon/hwmon1/temp2_crit": null,
+   "/sys/class/hwmon/hwmon1/temp3_label": "Sensor 2",
+   "/sys/class/hwmon/hwmon1/temp3_max": "65261850",
+   "/sys/class/hwmon/hwmon1/temp3_crit": null,
+   "/sys/class/hwmon/hwmon2/temp1_label": "asic",
+   "/sys/class/hwmon/hwmon2/temp1_max": null,
+   "/sys/class/hwmon/hwmon2/temp1_crit": "105000",
+   "/sys/class/hwmon/hwmon4/temp1_label": "asic",
+   "/sys/class/hwmon/hwmon4/temp1_max": null,
+   "/sys/class/hwmon/hwmon4/temp1_crit": "105000",
+   "/sys/class/hwmon/hwmon6/temp1_label": null,
+   "/sys/class/hwmon/hwmon6/temp1_max": null,
+   "/sys/class/hwmon/hwmon6/temp1_crit": null,
+   "/sys/class/thermal/thermal_zone0/type": "acpitz",
+   "/sys/class/thermal/thermal_zone0/trip_point_0_temp": "104800",
+   "/sys/class/thermal/thermal_zone0/trip_point_0_type": "critical",
+   "/sys/class/thermal/thermal_zone1/type": "acpitz",
+   "/sys/class/thermal/thermal_zone1/trip_point_0_temp": "104800",
+   "/sys/class/thermal/thermal_zone1/trip_point_0_type": "critical",
+   "/sys/class/thermal/thermal_zone2/type": "acpitz",
+   "/sys/class/thermal/thermal_zone2/trip_point_0_temp": "104800",
+   "/sys/class/thermal/thermal_zone2/trip_point_0_type": "critical",
+   "/sys/class/thermal/thermal_zone3/type": "acpitz",
+   "/sys/class/thermal/thermal_zone3/trip_point_0_temp": "104800",
+   "/sys/class/thermal/thermal_zone3/trip_point_0_type": "critical",
+   "/sys/class/thermal/thermal_zone4/type": "acpitz",
+   "/sys/class/thermal/thermal_zone4/trip_point_0_temp": "104800",
+   "/sys/class/thermal/thermal_zone4/trip_point_0_type": "critical",
+   "/sys/class/thermal/thermal_zone5/type": "acpitz",
+   "/sys/class/thermal/thermal_zone5/trip_point_0_temp": "104800",
+   "/sys/class/thermal/thermal_zone5/trip_point_0_type": "critical",
+   "/sys/class/thermal/thermal_zone6/type": "acpitz",
+   "/sys/class/thermal/thermal_zone6/trip_point_0_temp": "104800",
+   "/sys/class/thermal/thermal_zone6/trip_point_0_type": "critical",
+   "/sys/class/hwmon/hwmon1/temp1_input": "45850",
+   "/sys/class/hwmon/hwmon1/temp2_input": "46850",
+   "/sys/class/hwmon/hwmon1/temp3_input": "45850",
+   "/sys/class/hwmon/hwmon2/temp1_input": "54000",
+   "/sys/class/hwmon/hwmon4/temp1_input": "54000",
+   "/sys/class/hwmon/hwmon6/temp1_input": "45000",
+   "/sys/class/thermal/thermal_zone0/temp": "48300",
+   "/sys/class/thermal/thermal_zone1/temp": "47000",
+   "/sys/class/thermal/thermal_zone2/temp": "47300",
+   "/sys/class/thermal/thermal_zone3/temp": "47100",
+   "/sys/class/thermal/thermal_zone4/temp": "48000",
+   "/sys/class/thermal/thermal_zone5/temp": "46800",
+   "/sys/class/thermal/thermal_zone6/temp": "48300"
+  },
+  "real": {
+   "/sys/class/hwmon/hwmon0": "/sys/devices/virtual/thermal/thermal_zone0/hwmon0",
+   "/sys/class/hwmon/hwmon1": "/sys/devices/pci0004:00/0004:00:00.0/0004:01:00.0/nvme/nvme0/hwmon1",
+   "/sys/class/hwmon/hwmon1/device": "/sys/devices/pci0004:00/0004:00:00.0/0004:01:00.0/nvme/nvme0",
+   "/sys/class/hwmon/hwmon2": "/sys/devices/pci0000:00/0000:00:00.0/0000:01:00.0/hwmon/hwmon2",
+   "/sys/class/hwmon/hwmon2/device": "/sys/devices/pci0000:00/0000:00:00.0/0000:01:00.0",
+   "/sys/class/hwmon/hwmon3": "/sys/devices/pci0000:00/0000:00:00.0/0000:01:00.1/hwmon/hwmon3",
+   "/sys/class/hwmon/hwmon3/device": "/sys/devices/pci0000:00/0000:00:00.0/0000:01:00.1",
+   "/sys/class/hwmon/hwmon4": "/sys/devices/pci0002:00/0002:00:00.0/0002:01:00.0/hwmon/hwmon4",
+   "/sys/class/hwmon/hwmon4/device": "/sys/devices/pci0002:00/0002:00:00.0/0002:01:00.0",
+   "/sys/class/hwmon/hwmon5": "/sys/devices/pci0002:00/0002:00:00.0/0002:01:00.1/hwmon/hwmon5",
+   "/sys/class/hwmon/hwmon5/device": "/sys/devices/pci0002:00/0002:00:00.0/0002:01:00.1",
+   "/sys/class/hwmon/hwmon6": "/sys/devices/pci0009:00/0009:00:00.0/0009:01:00.0/ieee80211/phy0/hwmon6",
+   "/sys/class/hwmon/hwmon6/device": "/sys/devices/pci0009:00/0009:00:00.0/0009:01:00.0/ieee80211/phy0"
+  },
+  "exists": {
+   "/sys/class/hwmon/hwmon1/device": true,
+   "/sys/class/hwmon/hwmon2/device": true,
+   "/sys/class/hwmon/hwmon3/device": true,
+   "/sys/class/hwmon/hwmon4/device": true,
+   "/sys/class/hwmon/hwmon5/device": true,
+   "/sys/class/hwmon/hwmon6/device": true
+  },
+  "list": {
+   "/sys/class/hwmon/hwmon1/device/net": [],
+   "/sys/class/hwmon/hwmon2/device/net": [
+    "enp1s0f0np0"
+   ],
+   "/sys/class/hwmon/hwmon4/device/net": [
+    "enP2p1s0f0np0"
+   ],
+   "/sys/class/hwmon/hwmon6/device/net": []
+  }
+ },
+ "nvml": {
+  "driver": "580.178.04",
+  "gpus": [
+   {
+    "index": 0,
+    "name": "NVIDIA GB10",
+    "pci": "000f:01:00.0",
+    "thresholds": {
+     "shutdown": 90,
+     "slowdown": 86,
+     "gpu_max": 99
+    },
+    "memtemp": false,
+    "fans": 0,
+    "temp_value": 45,
+    "memtemp_value": null,
+    "fan_values": []
+   }
+  ]
+ },
+ "notes": []
+}

@@ -1,0 +1,31 @@
+# Bytecode, builds, and local environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Secrets and machine-local config. Copy the files in examples/ instead.
+.env
+.env.*
+credentials/
+*.pem
+*.key
+id_rsa
+id_ed25519
+hosts.json
+fleet.json
+
+# OS junk
+.DS_Store
+._*
+*.log
+docs/assets/.mac-frame.json
+scripts/render_readme_demos.py

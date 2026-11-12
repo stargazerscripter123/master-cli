@@ -1,0 +1,15 @@
+{
+  "refresh_seconds": 2.0,
+  "hosts": [
+    {"name": "train-a", "target": "gpu-a", "tags": ["training"]},
+    {"name": "train-b", "target": "gpu-b", "tags": ["training"]},
+    {"name": "spark", "target": "dgx-spark", "tags": ["gb10"]},
+    {"name": "studio", "target": "mac-studio", "tags": ["apple"]},
+    {"name": "laptop", "target": "mac-laptop", "tags": ["apple", "laptop"], "hidden": true}
+  ],
+  "modes": {
+    "mobile": ["laptop", "spark", "studio"],
+    "desktop": ["train-a", "train-b", "spark"],
+    "laptop": ["laptop"]
+  }
+}

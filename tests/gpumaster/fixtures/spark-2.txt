@@ -1,0 +1,87 @@
+__META__
+proto	2
+ts	1710142867
+__HOST__
+hostname	spark-2
+arch	aarch64
+kernel	6.8.0-1015-nvidia
+ncpu	20
+loadavg	1.07 1.06 1.08 2/1360 943476
+uptime	88526
+mem.MemTotal	130023424
+mem.MemFree	3145728
+mem.MemAvailable	52428800
+mem.Buffers	1419808
+mem.Cached	42266876
+mem.SwapTotal	16777212
+mem.SwapFree	15999248
+mem.Dirty	4652
+mem.Shmem	56568
+mem.SReclaimable	2469480
+__PSI__
+memory.some	avg10=0.00	avg60=0.00	avg300=0.00
+memory.full	avg10=0.00	avg60=0.00	avg300=0.00
+cpu.some	avg10=0.00	avg60=0.00	avg300=0.00
+cpu.full	avg10=0.00	avg60=0.00	avg300=0.00
+io.some	avg10=0.00	avg60=0.00	avg300=0.00
+io.full	avg10=0.00	avg60=0.00	avg300=0.00
+__GPU__
+fieldset	full
+fields	index,uuid,name,pci.bus_id,driver_version,vbios_version,pstate,temperature.gpu,temperature.gpu.tlimit,fan.speed,utilization.gpu,utilization.memory,utilization.encoder,utilization.decoder,memory.total,memory.used,memory.free,memory.reserved,power.draw.instant,power.limit,enforced.power.limit,power.max_limit,clocks.sm,clocks.max.sm,clocks.mem,clocks.max.mem,clocks.video,pcie.link.gen.current,pcie.link.gen.max,pcie.link.width.current,pcie.link.width.max,clocks_event_reasons.active,compute_mode,persistence_mode,mig.mode.current
+row	0, GPU-e546aab8-0178-5038-8327-081c5e7ab137, NVIDIA GB10, 0000000F:01:00.0, 555.42.02, 9A.00.1C.00.05, P0, 59, 36, [N/A], 0, 0, 0, 0, [N/A], [N/A], [N/A], [N/A], 13.82, [N/A], [N/A], [N/A], 2405, 3003, [N/A], [N/A], 2067, 1, 1, 1, 16, 0x0000000000000000, Default, Enabled, [N/A]
+__PIDS__
+|
+|==============NVSMI LOG==============
+|
+|Timestamp                                              : Tue Mar 11 09:41:07 2025
+|Driver Version                                         : 555.42.02
+|CUDA Version                                           : 13.0
+|
+|Attached GPUs                                          : 1
+|GPU 0000000F:01:00.0
+|    Processes
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 58486
+|            Type                          : G
+|            Name                          : /usr/lib/xorg/Xorg
+|            Used GPU Memory               : 180 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 58661
+|            Type                          : G
+|            Name                          : /usr/bin/gnome-shell
+|            Used GPU Memory               : 152 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 64638
+|            Type                          : G
+|            Name                          : /opt/teamviewer/tv_bin/TeamViewer
+|            Used GPU Memory               : 5 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 82381
+|            Type                          : C+G
+|            Name                          : /usr/bin/warp-terminal
+|            Used GPU Memory               : 228 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 198382
+|            Type                          : C
+|            Name                          : /home/user/miniconda3/envs/train_py312/bin/python
+|            Used GPU Memory               : 33569 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 566640
+|            Type                          : G
+|            Name                          : /usr/bin/gnome-control-center
+|            Used GPU Memory               : 27 MiB
+__PS__
+requested	6
+row	  58486 user     0.2 43880    23:18:22 /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -nolisten tcp -background none -noreset -keeptty -novtswitch -verbose 3
+row	  58661 user     1.2 298772   23:18:20 /usr/bin/gnome-shell
+row	  64638 user     0.2 75464    23:13:01 /opt/teamviewer/tv_bin/TeamViewer
+row	  82381 user     3.0 359876   23:01:47 /usr/bin/warp-terminal
+row	 198382 user     1.6 38351592 20:19:28 /home/user/miniconda3/envs/train_py312/bin/python main.py --listen 127.0.0.1 --port 8188 --disable-auto-launch
+row	 566640 user     0.0 193368   10:05:53 /usr/bin/gnome-control-center network
+__END__	86

@@ -1,0 +1,25 @@
+__META__
+proto	2
+ts	1715760000
+__HOST__
+hostname	mac-studio
+arch	arm64
+kernel	24.6.0
+ncpu	24
+loadavg	5.26 6.04 5.73 0/0 0
+uptime	11159
+mem.MemTotal	201326592
+mem.MemFree	165725430
+mem.MemAvailable	181780122
+mem.Cached	13057950
+mem.SwapTotal	0
+mem.SwapFree	0
+__PSI__
+__GPU__
+fieldset	apple
+fields	index,uuid,name,pci.bus_id,driver_version,vendor,utilization.gpu,memory.total,memory.used,memory.reserved,gpu.cores
+row	0, APPLE-mac-studio-0, Apple M2 Ultra, apple:0, 15.5.0, apple, 4, [N/A], 2769, 6889, 76
+__PIDS__
+__PS__
+requested	0
+__END__	78

@@ -1,0 +1,117 @@
+__META__
+proto	2
+ts	1710142867
+__HOST__
+hostname	workstation-a
+arch	x86_64
+kernel	6.8.0-40-generic
+ncpu	72
+loadavg	1.19 1.15 1.11 5/2935 2328120
+uptime	1054454
+mem.MemTotal	395103944
+mem.MemFree	129309000
+mem.MemAvailable	272989460
+mem.Buffers	777996
+mem.Cached	165291312
+mem.SwapTotal	20970996
+mem.SwapFree	19745764
+mem.Dirty	1088
+mem.Shmem	51848
+mem.SReclaimable	2641964
+__PSI__
+memory.some	avg10=0.00	avg60=0.00	avg300=0.00
+memory.full	avg10=0.00	avg60=0.00	avg300=0.00
+cpu.some	avg10=0.00	avg60=0.00	avg300=0.00
+cpu.full	avg10=0.00	avg60=0.00	avg300=0.00
+io.some	avg10=0.00	avg60=0.00	avg300=0.00
+io.full	avg10=0.00	avg60=0.00	avg300=0.00
+__GPU__
+fieldset	full
+fields	index,uuid,name,pci.bus_id,driver_version,vbios_version,pstate,temperature.gpu,temperature.gpu.tlimit,fan.speed,utilization.gpu,utilization.memory,utilization.encoder,utilization.decoder,memory.total,memory.used,memory.free,memory.reserved,power.draw.instant,power.limit,enforced.power.limit,power.max_limit,clocks.sm,clocks.max.sm,clocks.mem,clocks.max.mem,clocks.video,pcie.link.gen.current,pcie.link.gen.max,pcie.link.width.current,pcie.link.width.max,clocks_event_reasons.active,compute_mode,persistence_mode,mig.mode.current
+row	0, GPU-1a356caa-38a3-5643-a5e3-86ee98b37148, NVIDIA RTX 6000 Ada Generation, 00000000:1B:00.0, 550.127.05, 94.02.26.00.04, P8, 52, 39, 30, 0, 0, 0, 0, 49140, 33910, 14600, 632, 32.13, 300.00, 300.00, 300.00, 210, 3105, 405, 10001, 1185, 1, 4, 16, 16, 0x0000000000000001, Default, Disabled, [N/A]
+row	1, GPU-cdfba024-ab32-53a7-8e72-8bd72df9ae4e, NVIDIA RTX 6000 Ada Generation, 00000000:3D:00.0, 550.127.05, 94.02.26.00.04, P8, 51, 40, 30, 0, 0, 0, 0, 49140, 33910, 14600, 632, 27.51, 300.00, 300.00, 300.00, 210, 3105, 405, 10001, 1185, 1, 4, 16, 16, 0x0000000000000001, Default, Disabled, [N/A]
+row	2, GPU-ab266605-0f1a-519a-b551-55fa53a04440, NVIDIA RTX 6000 Ada Generation, 00000000:65:00.0, 550.127.05, 94.02.26.00.04, P8, 52, 39, 30, 0, 0, 0, 0, 49140, 728, 47749, 665, 30.02, 300.00, 300.00, 300.00, 210, 3105, 405, 10001, 1185, 1, 4, 16, 16, 0x0000000000000001, Default, Disabled, [N/A]
+row	3, GPU-639aa8ac-b7ab-57eb-812a-e714f4edc99b, NVIDIA RTX 6000 Ada Generation, 00000000:8B:00.0, 550.127.05, 94.02.26.00.04, P8, 50, 41, 30, 0, 0, 0, 0, 49140, 15, 48494, 632, 26.72, 300.00, 300.00, 300.00, 210, 3105, 405, 10001, 1185, 1, 4, 16, 16, 0x0000000000000001, Default, Disabled, [N/A]
+__PIDS__
+|
+|==============NVSMI LOG==============
+|
+|Timestamp                                              : Tue Mar 11 09:41:07 2025
+|Driver Version                                         : 550.127.05
+|CUDA Version                                           : 13.0
+|
+|Attached GPUs                                          : 4
+|GPU 00000000:1B:00.0
+|    Processes
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 4595
+|            Type                          : G
+|            Name                          : /usr/lib/xorg/Xorg
+|            Used GPU Memory               : 4 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 2296157
+|            Type                          : C
+|            Name                          : /home/user/miniconda3/envs/train_py312/bin/python
+|            Used GPU Memory               : 33818 MiB
+|
+|GPU 00000000:3D:00.0
+|    Processes
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 4595
+|            Type                          : G
+|            Name                          : /usr/lib/xorg/Xorg
+|            Used GPU Memory               : 4 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 2296382
+|            Type                          : C
+|            Name                          : /home/user/miniconda3/envs/train_py312/bin/python
+|            Used GPU Memory               : 33816 MiB
+|
+|GPU 00000000:65:00.0
+|    Processes
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 4595
+|            Type                          : G
+|            Name                          : /usr/lib/xorg/Xorg
+|            Used GPU Memory               : 188 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 4905
+|            Type                          : G
+|            Name                          : /usr/bin/gnome-shell
+|            Used GPU Memory               : 231 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 75436
+|            Type                          : C+G
+|            Name                          : warp-terminal
+|            Used GPU Memory               : 215 MiB
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 2184518
+|            Type                          : G
+|            Name                          : /opt/teamviewer/tv_bin/TeamViewer
+|            Used GPU Memory               : 6 MiB
+|
+|GPU 00000000:8B:00.0
+|    Processes
+|        GPU instance ID                   : N/A
+|        Compute instance ID               : N/A
+|        Process ID                        : 4595
+|            Type                          : G
+|            Name                          : /usr/lib/xorg/Xorg
+|            Used GPU Memory               : 4 MiB
+__PS__
+requested	6
+row	   4595 user     0.3 79560 12-04:52:45 /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -nolisten tcp -background none -noreset -keeptty -novtswitch -verbose 3
+row	   4905 user    11.4 3129696 12-04:52:41 /usr/bin/gnome-shell
+row	  75436 user     4.6 363892 12-03:39:05 warp-terminal
+row	2184518 user     0.3 171548   23:40:10 /opt/teamviewer/tv_bin/TeamViewer
+row	2296157 user    14.0 39167744 05:49:06 /home/user/miniconda3/envs/train_py312/bin/python main.py --listen 127.0.0.1 --port 8188 --disable-auto-launch
+row	2296382 user    13.3 38968712 05:49:01 /home/user/miniconda3/envs/train_py312/bin/python main.py --listen 127.0.0.1 --port 8189 --disable-auto-launch
+__END__	238

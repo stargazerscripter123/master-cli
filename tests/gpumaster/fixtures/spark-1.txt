@@ -1,0 +1,31 @@
+__META__
+proto	2
+ts	1710142867
+__HOST__
+hostname	spark-1
+arch	aarch64
+kernel	6.8.0-1016-nvidia
+ncpu	20
+loadavg	0.00 0.02 0.00 1/993 254442
+uptime	32284
+mem.MemTotal	130023424
+mem.MemFree	110000000
+mem.MemAvailable	125000000
+mem.Buffers	1666008
+mem.Cached	5669088
+mem.SwapTotal	16777212
+mem.SwapFree	16777212
+mem.Dirty	11624
+mem.Shmem	145044
+mem.SReclaimable	5120716
+__PSI__
+memory.some	avg10=0.00	avg60=0.00	avg300=0.00
+memory.full	avg10=0.00	avg60=0.00	avg300=0.00
+cpu.some	avg10=0.00	avg60=0.00	avg300=0.00
+cpu.full	avg10=0.00	avg60=0.00	avg300=0.00
+io.some	avg10=0.00	avg60=0.00	avg300=0.00
+io.full	avg10=0.00	avg60=0.00	avg300=0.00
+__ERROR__
+code	nvidia-smi-rc-9
+msg	NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.
+__END__	42

@@ -1,0 +1,10 @@
+{
+  "hosts": [
+    "gpu-a",
+    "gpu-b",
+    "dgx-spark",
+    "mac-studio",
+    {"name": "linux-laptop", "mobile": true},
+    {"name": "mac-laptop", "mobile": true}
+  ]
+}
