@@ -38,6 +38,8 @@ Plain `--fleet FILE` skips entries marked `"mobile": true`, because a closed lap
 
 Nothing is installed on the other machines. The viewer pipes `app.py` into `python3 -` over SSH, so every machine runs the same version you are looking at. A machine only needs SSH key login (`BatchMode`) and Python 3.8 or newer. If `fleet.json` is missing, the error tells you to copy the example.
 
+`python3` must be available in the remote non-interactive SSH environment. Check each host with `ssh -o BatchMode=yes HOST 'python3 --version'`; interactive shell setup alone may not put the right Python on that `PATH`.
+
 The fleet screen has one box per machine. `Enter` opens that machine. `Esc` returns to the fleet. A machine that cannot be reached shows `down` with SSH's own reason and is retried with backoff. A reconnect keeps the history. A machine that stops talking without dropping the connection shows `stale`.
 
 ```bash

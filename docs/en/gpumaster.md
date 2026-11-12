@@ -84,7 +84,11 @@ The host header includes RAM, swap and PSI. A machine can have idle GPUs and sti
 
 ## Unified memory
 
-DGX Spark / GB10 and Apple silicon do not have a separate framebuffer. NVIDIA reports memory usage as unsupported on GB10. The row shows GPU-resident memory (the sum of per-process NVML allocations, marked `*`) over the whole shared pool (`MemTotal`). The host line shows how that pool is split between GPU-held memory, other use, and what is still available. Fleet VRAM totals count discrete GPUs only. Unified parts get their own UMA line, because adding GPU memory to process RSS would count the same physical pages twice.
+On Apple silicon, basic GPU utilization and memory come from the stock `ioreg`, `sysctl` and `vm_stat` commands. Temperature, power, GPU clocks and ANE power are optionally enriched by `macmon` when installed on the sampled Mac and available to the remote sampler. Without it, those extra fields remain unavailable. Basic sampling does not provide per-process Apple GPU attribution. `macmaster` uses its own native collectors; it does not require `macmon`.
+
+DGX Spark / GB10 and Apple silicon use a shared memory pool rather than a separate framebuffer. When GB10 framebuffer usage is unsupported, GPU-resident memory is derived from per-process NVIDIA allocations and marked `*`. Apple GPU resident memory comes from IOAccelerator counters. The shared pool comes from Linux `MemTotal` / `MemAvailable`, or macOS `sysctl` / `vm_stat`.
+
+The host line separates GPU-held memory, other use and available memory. GPU-resident memory is a subset of host use, rather than extra physical capacity. Fleet VRAM totals count discrete GPUs only; unified hosts get a separate UMA line to avoid double counting.
 
 ## `free` and `serve`
 
@@ -96,9 +100,12 @@ curl -s localhost:8765/metrics
 
 `free` skips a GPU on a host that is itself short of RAM. `serve` is a small HTTP server in the standard library: an ANSI screen, JSON, and Prometheus text. Metrics are named `gpumaster_*`.
 
+Selection is based on the current snapshot and does not reserve GPUs. `env` and `ssh` output formats select CUDA hosts; they exclude Apple GPUs. The server exposes `/`, `/fleet.txt`, `/fleet.ansi`, `/api/fleet.json` and `/metrics`. It has no built-in authentication or TLS and includes host and process information. Keep the default loopback binding and use an SSH tunnel for remote access.
+
 ## Replay
 
 ```bash
+mkdir -p captures
 gpumaster --probe gpu-a > captures/gpu-a.txt
 gpumaster --replay captures --once
 ```

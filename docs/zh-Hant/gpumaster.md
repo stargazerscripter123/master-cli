@@ -84,7 +84,11 @@ gpumaster init            # 寫出 ~/.config/gpumaster/hosts.json
 
 ## 統一記憶體
 
-DGX Spark / GB10 和 Apple 晶片沒有獨立的顯示記憶體。NVIDIA 在 GB10 上回報記憶體用量不受支援。這一列顯示的是 GPU 駐留記憶體（各行程 NVML 配置的加總，標成 `*`）除以整個共用池（`MemTotal`）。主機那一行再把這個池分成 GPU 持有、其他用途，以及仍然可用的部分。機群的 VRAM 合計只算獨立 GPU。統一記憶體的部分另有一行 UMA，因為把 GPU 記憶體再加到行程 RSS 上，會把同一批實體頁面算兩次。
+Apple 晶片的基本 GPU 使用率與記憶體來自內建 `ioreg`、`sysctl` 與 `vm_stat`。若被採樣的 Mac 已安裝 `macmon` 且遠端採樣程式可找到它，會額外取得溫度、功耗、GPU 時脈與 ANE 功耗；沒有時，這些欄位保持不可用。基本採樣不提供 Apple GPU 的逐行程歸屬。`macmaster` 使用自己的原生蒐集器，不需要 `macmon`。
+
+DGX Spark / GB10 與 Apple 晶片使用共享記憶體池，而非獨立 framebuffer。GB10 不支援 framebuffer 用量時，GPU 駐留記憶體由 NVIDIA 逐行程配置加總推導，標成 `*`；Apple GPU 駐留記憶體則來自 IOAccelerator 計數器。共享池以 Linux `MemTotal` / `MemAvailable`，或 macOS `sysctl` / `vm_stat` 取得。
+
+主機列把池分成 GPU 持有、其他用途與可用記憶體。GPU 駐留量是主機已用記憶體的子集，不是額外的實體容量。機群 VRAM 合計只算獨立 GPU；統一記憶體主機另列 UMA，避免重複計算。
 
 ## `free` 與 `serve`
 
@@ -96,9 +100,12 @@ curl -s localhost:8765/metrics
 
 `free` 會跳過所在主機本身記憶體不足的 GPU。`serve` 是標準函式庫裡的一個小 HTTP 伺服器：ANSI 畫面、JSON，以及 Prometheus 文字。指標名稱是 `gpumaster_*`。
 
+篩選根據當下快照，不會預約 GPU。`env` 與 `ssh` 格式選擇 CUDA 主機，不包含 Apple GPU。伺服器提供 `/`、`/fleet.txt`、`/fleet.ansi`、`/api/fleet.json` 與 `/metrics`；沒有內建驗證或 TLS，且含有主機與行程資訊。請保留預設 loopback 綁定，遠端存取使用 SSH tunnel。
+
 ## 重播
 
 ```bash
+mkdir -p captures
 gpumaster --probe gpu-a > captures/gpu-a.txt
 gpumaster --replay captures --once
 ```

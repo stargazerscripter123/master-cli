@@ -38,6 +38,8 @@ thermalmaster --fleet fleet.json --mobile
 
 其他機器不用安裝任何東西。查看器把 `app.py` 經由 SSH 送進 `python3 -`，所以每台機器跑的都是你正在看的這個版本。一台機器只需要 SSH 金鑰登入（`BatchMode`）和 Python 3.8 或更新版本。若找不到 `fleet.json`，錯誤訊息會請你複製範例。
 
+遠端非互動式 SSH 環境必須能找到 `python3`。逐台以 `ssh -o BatchMode=yes HOST 'python3 --version'` 確認；只有互動式 shell 的設定，不一定能讓該 `PATH` 找到正確的 Python。
+
 機群畫面每台機器一個方塊。`Enter` 打開那台機器。`Esc` 回到機群。連不上的機器顯示 `down`，並附上 SSH 自己的原因，然後以退避間隔重試。重新連上後歷史會保留。連線沒斷、卻不再送資料時顯示 `stale`。
 
 ```bash

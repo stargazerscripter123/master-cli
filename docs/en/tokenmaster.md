@@ -2,7 +2,9 @@
 
 One terminal view of weekly quota and prepaid credits for Codex, Claude, Antigravity, Grok, Cursor and OpenRouter.
 
-Credentials stay on the machine where you already signed in. tokenmaster reads them from each product's config directory or, on macOS, from the keychain. It does not store tokens in this repository. Do not commit `~/.config/tokenmaster` or paste a live API key into a ticket.
+tokenmaster discovers existing credentials in each product's config directory or, on macOS, in the keychain. Run `tokenmaster doctor` to inspect availability, then select your providers with `-p`.
+
+`auth`, `login` and account snapshots can save or copy credentials into tokenmaster configuration or named profiles. Some providers refresh tokens and persist them back to their credential source. Configuration defaults to `~/.config/tokenmaster`; if that location is not writable, it falls back to `.tokenmaster/` in the working directory. This repository ignores that fallback; other repositories need their own ignore rule. Set `TOKENMASTER_CONFIG_DIR` to choose a fixed configuration directory. Keep configuration and profiles private.
 
 ```bash
 tokenmaster                         # dashboard
@@ -27,7 +29,9 @@ tokenmaster --json
 | `cursor` | `cursor-agent` auth, the macOS keychain, or `state.vscdb` |
 | `openrouter` | `OPENROUTER_API_KEY` or a key saved with `tokenmaster auth` |
 
-Calls run concurrently. A deadline (`TOKENMASTER_DEADLINE` or `deadline_seconds` in the config) keeps a slow provider from blocking the others. Partial data is kept.
+Calls run concurrently. Set `deadline_seconds` in the configuration file shown by `tokenmaster config path` to bound a dashboard refresh. The default is 2.5 times `timeout_seconds` (20 seconds with the default 8-second timeout); `0` disables the global deadline. Partial data is kept. Credential persistence already in progress may still need to finish before process exit.
+
+Provider integrations depend on upstream responses and credential formats. Available quota windows and credits differ by account; an API key alone does not guarantee subscription quota data. Local session usage and API-equivalent cost estimates are not provider billing statements.
 
 ## Accounts
 
@@ -39,13 +43,13 @@ tokenmaster account snapshot codex personal
 tokenmaster account add openrouter team --api-key "$OPENROUTER_API_KEY"
 tokenmaster account list
 tokenmaster exec claude work
-tokenmaster exec claude:auto          # the account with the most headroom
+tokenmaster exec claude:auto          # select using the default smart strategy
 eval "$(tokenmaster env claude work)" # this shell only
 tokenmaster -p claude:default,claude:work
 tokenmaster account remove claude work --purge
 ```
 
-`tokenmaster pick claude` prints the account name. Strategies are `smart` (the default), `most-remaining` and `expiring-first`.
+`login` and `exec` require the provider's native CLI to be installed. `snapshot` copies an existing sign-in; it does not create a new subscription. `pick` recommends an account and reports its reasoning; add `--quiet` to print only the account name. Strategies are `smart` (the default), `most-remaining` and `expiring-first`. Selection considers usable quota, the short-window limit and reset timing. `exec` selects at launch; it does not switch accounts inside an already running session.
 
 ## Other commands
 
@@ -61,21 +65,24 @@ tokenmaster config show
 tokenmaster config path
 tokenmaster config clear-cache
 
-tokenmaster statusline                # one line from a snapshot, for a prompt
-tokenmaster statusline --format tmux
-tokenmaster statusline --format claude-code
+tokenmaster statusline --no-refresh   # cached data only; no provider queries
+tokenmaster statusline --format tmux --async-refresh
+tokenmaster statusline --format claude-code --async-refresh
 
-tokenmaster history --days 30 --by day
-tokenmaster history --by provider
-tokenmaster history --by model
-tokenmaster history --by project
+tokenmaster history daily --days 30
+tokenmaster history daily -p codex --days 30
+tokenmaster history models
+tokenmaster history projects
+tokenmaster history projects --export csv --output usage.csv
 
 tokenmaster notify                    # desktop notification at 80%, 95%, 100%
 tokenmaster notify --threshold 75,90,100 --dry-run
 tokenmaster --watch --notify
 ```
 
-The reset column includes a pace (`surplus`, `on_track`, `fast`, `overburn`) and an estimate of when the window runs out. `statusline` reads the last snapshot and does not block the prompt; a refresh happens in the background when the snapshot is old. `history` reads a local SQLite file, `warehouse.db`, so a later cleanup of the upstream CLI logs does not erase the ledger.
+The reset column includes a pace (`surplus`, `on_track`, `fast`, `overburn`) and an estimate of when the window runs out. `statusline` reuses a fresh snapshot but can query providers synchronously when it is missing or stale. `--async-refresh` returns an existing stale snapshot while refreshing in the background; the first fetch can still block. Use `--no-refresh` for a prompt that never queries providers, and populate its snapshot by running the dashboard first.
+
+`history` reads a local SQLite ledger, normally `~/.local/share/tokenmaster/warehouse.db`, and syncs available local sessions unless `--no-sync` is given. It supports `daily`, `weekly`, `monthly`, `projects`, `models` and `snapshots` views. Imported records survive later cleanup of the upstream CLI logs; history coverage depends on which data has been imported.
 
 Project names stored in that ledger are reduced to a short label. Home-directory prefixes are stripped before anything is written.
 

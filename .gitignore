@@ -16,6 +16,7 @@ venv/
 .env
 .env.*
 credentials/
+.tokenmaster/
 *.pem
 *.key
 id_rsa
