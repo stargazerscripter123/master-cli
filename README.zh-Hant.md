@@ -8,27 +8,52 @@
 
 **macOS + Linux · Python 3.10+ · 無第三方 Python 執行期套件 · MIT**
 
-[安裝](#安裝) · [機群部署](#機群部署) · [AI 帳號](#ai-帳號) · [匯出與整合](#匯出與整合) · [疑難排解](#疑難排解) · [完整手冊](#完整手冊)
-
-| 工具 | 適合解決的問題 | 主要能力 |
-|---|---|---|
-| [`gpumaster`](docs/zh-Hant/gpumaster.md) | 哪台機器還有 GPU 可以跑工作？ | NVIDIA 與 Apple 晶片混合機群、閒置 GPU 篩選、行程歸屬、JSON 與 Prometheus |
-| [`macmaster`](docs/zh-Hant/macmaster.md) | 這台機器究竟卡在哪裡？ | CPU、GPU、RAM、磁碟、網路、行程同屏顯示，支援歷史曲線、錄製與回放 |
-| [`thermalmaster`](docs/zh-Hant/thermalmaster.md) | 是溫度、功耗還是降頻在拖慢工作？ | 感測器曲線、硬體門檻、風扇、熱壓力，本機與 SSH 機群檢視 |
-| [`tokenmaster`](docs/zh-Hant/tokenmaster.md) | 下一個任務該用哪個 AI 帳號？ | 六個平台、多帳號、重設倒數、消耗節奏、帳號選擇與用量歷史 |
-
-下圖為**使用工具本身 UI 程式碼繪製的示意資料**。硬體名稱、訂閱方案與讀數都是範例，不代表已驗證的相容清單或效能量測。
-
-![GPU 機群、系統、AI 配額與溫度儀表板](docs/assets/overview.png)
+[為什麼使用](#為什麼使用-master-cli) · [工具畫面](#工具畫面) · [安裝](#安裝) · [機群部署](#機群部署) · [AI 帳號](#ai-帳號) · [匯出與整合](#匯出與整合) · [疑難排解](#疑難排解) · [完整手冊](#完整手冊)
 
 ## 為什麼使用 master-cli
 
-- **理解不同硬體的記憶體。** `gpumaster` 區分獨立 GPU 的 VRAM，以及 Apple 晶片、DGX Spark / GB10 的共享記憶體。機群總計避免把同一份統一記憶體重複相加；推導值與不可信讀數都有標示。
-- **直接回答「這個工作可以放哪裡跑？」** `gpumaster free --min-mem 20 -n 2` 找出有兩張符合條件之閒置 GPU 的主機，同時檢查 RAM 壓力，避免只看空顯卡卻忽略主機記憶體不足。結果是當下快照，不會預約或鎖定 GPU。
-- **指標旁邊就有診斷線索。** GPU 行程可對照主機負載、RAM、swap 與 Linux PSI；系統行程與溫度歷史可進一步追查瓶頸。離線主機保留錯誤狀態，GPU 採樣失敗時也不丟掉仍可讀取的主機資料。
-- **部署負擔小。** 原始碼安裝程式不需要 pip 套件或 root。`gpumaster` 與 `thermalmaster --fleet` 透過 SSH 傳送蒐集程式，節點不必安裝工具集；`macmaster --fleet` 則使用遠端已安裝的版本。
-- **把多個 AI 訂閱變成一套工作流程。** `tokenmaster` 讀取既有登入資料、管理具名帳號，並可用選定帳號啟動平台原生 CLI。平台請求並行執行，支援可設定的重新整理期限及部分結果。
-- **看完畫面還能繼續用資料。** 四個工具都有 JSON 輸出，另有系統 NDJSON 錄製、溫度 CSV、GPU Prometheus 指標，以及 shell 提示字元或 tmux 可用的配額狀態列。
+- **混合 GPU 機群。** NVIDIA 與 Apple 晶片同屏查看，獨立 VRAM 與共享記憶體分開計量。
+- **快速找可用資源。** `gpumaster free` 依閒置狀態、可用記憶體、卡數與主機 RAM 壓力篩選。
+- **追查機器瓶頸。** 對照主機記憶體、GPU 行程與溫度歷史，找出效能受限的線索。
+- **部署輕量。** 無第三方 Python 執行期套件；GPU 與溫度機群透過 SSH 蒐集，節點不必安裝工具集。
+- **AI 多帳號管理。** 查看多平台與多帳號的餘量和重設時間，並以選定帳號啟動原生 CLI。
+- **資料能繼續使用。** JSON、系統錄製回放、溫度 CSV、Prometheus 指標與提示字元狀態列。
+
+## 工具畫面
+
+Mac 單機截圖顯示 Apple M4 Max 系統。機群與訂閱畫面由工具本身的 UI 程式碼繪製示意資料，硬體名稱、訂閱方案與讀數都是範例。
+
+### gpumaster
+
+**Fleet 機群模式** — 在同一個畫面查看 NVIDIA 與 Apple 晶片主機的 GPU 負載、記憶體、溫度、功耗與行程。
+
+![NVIDIA 與 Apple 晶片混合 GPU 機群](docs/assets/gpumaster-fleet.png)
+
+### macmaster
+
+**macOS 單機模式** — CPU、GPU、記憶體、磁碟、網路與行程同屏顯示。
+
+![Apple 晶片 Mac 上的 macmaster](docs/assets/macmaster-mac.png)
+
+**Fleet 機群模式** — 透過 SSH 查看多台主機的系統儀表板。
+
+![macmaster 系統機群](docs/assets/macmaster-fleet.png)
+
+### thermalmaster
+
+**macOS 單機模式** — 溫度歷史曲線、風扇與功耗。
+
+![Apple 晶片 Mac 上的 thermalmaster](docs/assets/thermalmaster-mac.png)
+
+**Fleet 機群模式** — 透過 SSH 查看多台主機的感測器歷史。
+
+![thermalmaster 感測器機群](docs/assets/thermalmaster-fleet.png)
+
+### tokenmaster
+
+查看多個 AI 平台與具名帳號的剩餘配額、重設倒數與點數。
+
+![tokenmaster 多帳號配額儀表板](docs/assets/tokenmaster.png)
 
 ## 安裝
 
@@ -264,40 +289,6 @@ curl http://127.0.0.1:8765/metrics
 ```bash
 ssh -N -L 8765:127.0.0.1:8765 your-monitor-host
 ```
-
-## 更多畫面
-
-下方 Mac 單機截圖顯示 Apple M4 Max 系統；機群與訂閱畫面使用示意資料。
-
-<details>
-<summary>GPU 機群：逐 GPU 指標與行程</summary>
-
-![NVIDIA 與 Apple 晶片混合 GPU 機群](docs/assets/gpumaster-fleet.png)
-
-</details>
-
-<details>
-<summary>系統監控：Mac 單機與機群</summary>
-
-![Apple 晶片 Mac 上的 macmaster](docs/assets/macmaster-mac.png)
-![macmaster 系統機群](docs/assets/macmaster-fleet.png)
-
-</details>
-
-<details>
-<summary>溫度監控：Mac 單機與機群</summary>
-
-![Apple 晶片 Mac 上的 thermalmaster](docs/assets/thermalmaster-mac.png)
-![thermalmaster 感測器機群](docs/assets/thermalmaster-fleet.png)
-
-</details>
-
-<details>
-<summary>AI 配額：多平台與具名帳號</summary>
-
-![tokenmaster 多帳號配額儀表板](docs/assets/tokenmaster.png)
-
-</details>
 
 ## 疑難排解
 

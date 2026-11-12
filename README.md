@@ -8,27 +8,52 @@ Four terminal tools for the resources behind your AI work: GPU fleets, system te
 
 **macOS + Linux · Python 3.10+ · Zero third-party Python runtime packages · MIT**
 
-[Install](#install) · [Fleet setup](#fleet-setup) · [AI accounts](#ai-accounts) · [Export and integrate](#export-and-integrate) · [Troubleshooting](#troubleshooting) · [Manuals](#manuals)
-
-| Tool | Use it to… | Highlights |
-|---|---|---|
-| [`gpumaster`](docs/en/gpumaster.md) | Find capacity across your GPU fleet | Mixed NVIDIA / Apple silicon fleets, idle GPU selection, process ownership, JSON and Prometheus |
-| [`macmaster`](docs/en/macmaster.md) | Explain what is happening on a machine | CPU + GPU + RAM + disks + network + processes, history graphs, recording and replay |
-| [`thermalmaster`](docs/en/thermalmaster.md) | Catch heat, power and throttling problems | Sensor curves, hardware thresholds, fan speeds, thermal pressure, local and SSH fleet views |
-| [`tokenmaster`](docs/en/tokenmaster.md) | See which AI account can take the next task | Six providers, multiple accounts, reset countdowns, usage pace, account selection and usage history |
-
-The preview uses **illustrative data rendered by the toolkit's UI code**. Hardware names, subscription labels and readings are examples, rather than a tested compatibility list or performance measurements.
-
-![GPU fleet, system, AI quota and thermal dashboards](docs/assets/overview.png)
+[Why master-cli](#why-master-cli) · [Screenshots](#screenshots) · [Install](#install) · [Fleet setup](#fleet-setup) · [AI accounts](#ai-accounts) · [Export and integrate](#export-and-integrate) · [Troubleshooting](#troubleshooting) · [Manuals](#manuals)
 
 ## Why master-cli
 
-- **A fleet view that understands memory.** `gpumaster` separates discrete GPU VRAM from shared memory on Apple silicon and DGX Spark / GB10. Fleet totals avoid counting the same unified memory twice; derived or untrustworthy readings are marked.
-- **An answer to “where can I run this?”** `gpumaster free --min-mem 20 -n 2` finds hosts with two qualifying idle GPUs. It also checks host RAM pressure, because an empty GPU on a memory-starved machine is a poor place to start a job. Selection is a snapshot; it does not reserve GPUs.
-- **Context behind the numbers.** GPU processes sit alongside host load, RAM, swap and Linux PSI. Drill into system processes and thermal histories to investigate bottlenecks. Failed hosts retain an error state; GPU sampling failure does not discard readable host telemetry.
-- **A small deployment footprint.** The source installer needs no pip packages or root. `gpumaster` and `thermalmaster --fleet` stream collectors over SSH without installing the toolkit on nodes. `macmaster --fleet` uses an installed copy on each remote host.
-- **One workflow for AI subscriptions.** `tokenmaster` reads existing sign-ins, tracks named accounts, and can launch a provider CLI using a selected account. Provider requests run concurrently with a configurable refresh deadline and partial results.
-- **Useful beyond the live screen.** All four tools expose JSON. Add system NDJSON recordings, thermal CSV logs, GPU Prometheus metrics, or a quota status line for your prompt or tmux.
+- **Mixed GPU fleets.** Watch NVIDIA and Apple silicon together, with discrete VRAM and shared memory tracked separately.
+- **Find available capacity.** `gpumaster free` filters idle GPUs by free memory, GPU count and host RAM pressure.
+- **Diagnose bottlenecks.** Compare host memory, GPU processes and thermal history to investigate slow machines.
+- **Simple deployment.** No third-party Python runtime packages. GPU and thermal fleets collect over SSH without a toolkit installation on nodes.
+- **Manage AI accounts.** Track quotas and reset times across providers and profiles, then launch a native CLI with the selected account.
+- **Reuse the data.** JSON, system recording and replay, thermal CSV, Prometheus metrics and prompt status lines.
+
+## Screenshots
+
+The Mac single-machine screenshots show an Apple M4 Max system. Fleet and subscription screens use illustrative data rendered by the toolkit's UI code; their hardware names, subscription labels and readings are examples.
+
+### gpumaster
+
+**Fleet mode** — GPU load, memory, temperatures, power and processes across NVIDIA and Apple silicon hosts.
+
+![GPU fleet with NVIDIA and Apple silicon hosts](docs/assets/gpumaster-fleet.png)
+
+### macmaster
+
+**Single-machine mode · macOS** — CPU, GPU, memory, disks, network and processes on one screen.
+
+![macmaster on an Apple silicon Mac](docs/assets/macmaster-mac.png)
+
+**Fleet mode** — system dashboards across SSH hosts.
+
+![macmaster system fleet](docs/assets/macmaster-fleet.png)
+
+### thermalmaster
+
+**Single-machine mode · macOS** — temperature histories, fans and power.
+
+![thermalmaster on an Apple silicon Mac](docs/assets/thermalmaster-mac.png)
+
+**Fleet mode** — sensor histories across SSH hosts.
+
+![thermalmaster sensor fleet](docs/assets/thermalmaster-fleet.png)
+
+### tokenmaster
+
+AI providers and named accounts, with remaining quotas, reset countdowns and credits.
+
+![tokenmaster multi-account quota dashboard](docs/assets/tokenmaster.png)
 
 ## Install
 
@@ -264,40 +289,6 @@ Open [the local dashboard](http://127.0.0.1:8765/) in a browser, or use `/fleet.
 ```bash
 ssh -N -L 8765:127.0.0.1:8765 your-monitor-host
 ```
-
-## More screenshots
-
-The single-machine Mac screenshots show an Apple M4 Max system. Fleet and subscription views use illustrative data.
-
-<details>
-<summary>GPU fleet: per-GPU telemetry and processes</summary>
-
-![GPU fleet with NVIDIA and Apple silicon hosts](docs/assets/gpumaster-fleet.png)
-
-</details>
-
-<details>
-<summary>System monitor: Mac and fleet views</summary>
-
-![macmaster on an Apple silicon Mac](docs/assets/macmaster-mac.png)
-![macmaster system fleet](docs/assets/macmaster-fleet.png)
-
-</details>
-
-<details>
-<summary>Thermal monitor: Mac and fleet views</summary>
-
-![thermalmaster on an Apple silicon Mac](docs/assets/thermalmaster-mac.png)
-![thermalmaster sensor fleet](docs/assets/thermalmaster-fleet.png)
-
-</details>
-
-<details>
-<summary>AI quotas: providers and named accounts</summary>
-
-![tokenmaster multi-account quota dashboard](docs/assets/tokenmaster.png)
-
-</details>
 
 ## Troubleshooting
 
